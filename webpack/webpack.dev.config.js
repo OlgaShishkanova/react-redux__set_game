@@ -19,6 +19,7 @@ module.exports = {
         }
         ]
     },
+    watch:true,
     mode: 'development',
     output: {
         path: parentDir + '/dist',
