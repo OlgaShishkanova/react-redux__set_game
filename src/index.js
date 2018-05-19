@@ -1,7 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
+import './styles.scss';
 
 // main app
-import App from './containers/App';
+import App from './containers/App/App';
 
-ReactDOM.render(<App />, document.getElementById('app'));
+render(<App />, document.getElementById('app'));
