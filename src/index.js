@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux'
 import configureStore from './store/configureStore'
+import { AppContainer } from 'react-hot-loader'
 import App from './containers/App/App';
 import './styles.scss';
 
@@ -10,9 +11,22 @@ import './styles.scss';
 const store = configureStore();
 console.log('Начальный Redux Store', store.getState());
 
-render(
-    <Provider store={store}>
-        <App />
-    </Provider>,
-    document.getElementById('root')
-)
+const renderApp = () => {
+    render(
+        <AppContainer warnings={false}>
+            <Provider store={store}>
+                <App />
+            </Provider>
+        </AppContainer>,
+        document.getElementById('root')
+    )
+};
+
+renderApp(App);
+
+// Webpack Hot Module Replacement API
+if (module.hot) {
+    module.hot.accept('./containers/App/App', () => {
+        renderApp(App)
+    })
+}

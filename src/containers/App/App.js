@@ -4,7 +4,6 @@ import './App.scss';
 export default class App extends Component {
 
     render () {
-        console.log('vvbbbb')
-        return <p className="puka">А пупошка там вон все сидит и пуковит))</p>
+        return <div className="puka">А Андрюшка-пупошка там вон все сидит и пуковит))</div>
     }
 }
