@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server --mode development --config config/webpack.base.config.js --open --hot --history-api-fallback"
+    "dev": "webpack-dev-server --mode development --config config/webpack.base.config.js --open --history-api-fallback"
   },
   "repository": {
     "type": "git",
@@ -20,7 +20,6 @@
   "dependencies": {
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
-    "react-hot-loader": "^4.2.0",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",
     "redux-thunk": "^2.3.0"
