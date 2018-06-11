@@ -1,26 +1,11 @@
 import React, {Component} from "react";
 import './App.scss';
+import '../../css/grid.scss'
 
 export default class App extends Component {
 
     render () {
-        return <div className="puka">potato
-            <div>fsfs
-                fg
-                df
-                uio;io;i
-                bh
-                d</div>
-            <div>
-                tyjtyj
-                tyj
-                ty
-                jt
-                y
-                jt
-                yj
-
-            </div>
-        </div>;
+        return <div className="inner"><div className="puka">potato <a href='www.puka.org'>link</a>
+        </div></div>
     }
 }
