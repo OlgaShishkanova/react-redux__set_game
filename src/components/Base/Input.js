@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 //import css from './Input.scss'
 import PropTypes from 'prop-types'
-//import ErrorsHandler from '../../components/ErrorsHandler/ErrorsHandler'
+import ErrorsHandler from './ErrorsHandler'
 
 export default class Input extends PureComponent {
 
@@ -18,10 +18,10 @@ export default class Input extends PureComponent {
         textarea: PropTypes.bool
     };
 
-    handleChange (e) {
-        const { name, onChange } = this.props;
 
-        onChange(name, { value: e.target.value })
+    handleChange(e) {
+        //call the method for every change in Input
+        this.props.actions.changeField(this.props.name, { value: e.target.value })
     }
 
     render () {
@@ -34,9 +34,8 @@ export default class Input extends PureComponent {
             textarea,
             required,
             tryToSubmit,
-            fields_errors,
-            newPassValue
-        } = this.props
+            fields_errors
+        } = this.props;
 
         return (
             <div>
@@ -45,17 +44,16 @@ export default class Input extends PureComponent {
                 {textarea ?
                     <textarea
                     {...{ type, placeholder, name, value }}
-                    onChange={::this.handleChange}
+                    onChange={()=>this.handleChange()}
                 />
                     :
                 <input
                     {...{ type, placeholder, name, value }}
-                    onChange={::this.handleChange}
+                    onChange={()=>this.handleChange()}
                 />
                 }
                 <ErrorsHandler
                     nameOfInput={name} {...{
-                    newPassValue,
                     type,
                     tryToSubmit,
                     required,

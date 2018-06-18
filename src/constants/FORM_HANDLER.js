@@ -1,0 +1,2 @@
+export const CHANGE_FORM_FIELD = 'CHANGE_FORM_FIELD';
+export const CLEAR_FORM = 'CLEAR_FORM';
