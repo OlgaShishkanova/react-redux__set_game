@@ -1,5 +1,6 @@
 import {
-    LOCAL_STORAGE_SUBSCRIBE
+    LOCAL_STORAGE_GET_ITEM,
+    LOCAL_STORAGE_SET_ITEM
 
 } from '../constants/APP'
 
@@ -16,14 +17,14 @@ export default function App (state = initialState, action) {
 
             return {
                 ...state,
-                intro_name: JSON.parse(action.payload.getItem('userName'))
+                intro_name: JSON.parse(localStorage.getItem(action.payload.name))
             };
 
         case LOCAL_STORAGE_SET_ITEM:
-
+            localStorage.setItem(action.payload.name, JSON.stringify(action.payload.data));
             return {
                 ...state,
-                intro_name: localStorage.setItem('userName', JSON.stringify(action.payload))
+                intro_name: action.payload.data
             };
 
         default:

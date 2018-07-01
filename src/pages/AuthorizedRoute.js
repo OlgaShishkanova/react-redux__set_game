@@ -38,8 +38,7 @@ export default class AuthorizedRoute extends Component {
     componentDidMount () {
         const { intro_name } = this.props.state;
         if (intro_name === null) {
-            let localStorage = window.localStorage;
-            this.props.actions.localStorageSubscribe(localStorage)
+            this.props.actions.localStorageGetItem('userName')
         }
     }
 }

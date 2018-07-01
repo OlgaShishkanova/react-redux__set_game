@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
 import { Redirect } from 'react-router-dom'
 import Input from "../../components/Base/Input"
 import * as AppActions from "../../actions/AppActions";
-import {bindActionCreators} from "redux/index";
 
-@connect(mapStateToProps)
+@connect(mapStateToProps, mapDispatchToProps)
+
 export default class IntroPage extends Component {
 
     state = {
@@ -25,7 +26,7 @@ export default class IntroPage extends Component {
 
     submit() {
         const {name} = this.props.form_handler;
-        localStorage.setItem('userName', JSON.stringify(name.value))
+        this.props.actions.localStorageSetItem('userName', name.value)
     }
 
     //change tryToSubmit for implementation the errors
