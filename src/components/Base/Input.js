@@ -1,8 +1,12 @@
 import React, { PureComponent } from 'react'
 //import css from './Input.scss'
+import {bindActionCreators} from "redux";
 import PropTypes from 'prop-types'
 import ErrorsHandler from './ErrorsHandler'
+import * as FormHandlerActions from "../../actions/FormHandlerActions";
+import {connect} from "react-redux";
 
+@connect(null, mapDispatchToProps)
 export default class Input extends PureComponent {
 
     static propTypes = {
@@ -19,10 +23,11 @@ export default class Input extends PureComponent {
     };
 
 
-    handleChange(e) {
-        //call the method for every change in Input
-        this.props.actions.changeField(this.props.name, { value: e.target.value })
-    }
+    handleChange = (e) => {
+        //call the method for every change in input/textarea
+
+        this.props.actions.changeField(this.props.name, { value: e.currentTarget.value })
+    };
 
     render () {
 
@@ -44,12 +49,12 @@ export default class Input extends PureComponent {
                 {textarea ?
                     <textarea
                     {...{ type, placeholder, name, value }}
-                    onChange={()=>this.handleChange()}
+                    onChange={this.handleChange}
                 />
                     :
                 <input
                     {...{ type, placeholder, name, value }}
-                    onChange={()=>this.handleChange()}
+                    onChange={this.handleChange}
                 />
                 }
                 <ErrorsHandler
@@ -64,4 +69,9 @@ export default class Input extends PureComponent {
         )
     }
 
+}
+function mapDispatchToProps (dispatch) {
+    return {
+        actions: bindActionCreators(FormHandlerActions, dispatch)
+    }
 }

@@ -1,17 +1,18 @@
 import React, { Component } from 'react'
-import * as FormHandlerActions from "../../actions/FormHandlerActions";
-import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
+import { Redirect } from 'react-router-dom'
 import Input from "../../components/Base/Input"
+import * as AppActions from "../../actions/AppActions";
+import {bindActionCreators} from "redux/index";
 
-@connect(mapStateToProps, mapDispatchToProps)
+@connect(mapStateToProps)
 export default class IntroPage extends Component {
 
     state = {
         tryToSubmit: false
     };
 
-    handleSubmit(e) {
+    handleSubmit = (e) => {
 
         e.preventDefault();
         //check active errors
@@ -19,11 +20,11 @@ export default class IntroPage extends Component {
         if (!items) {
             this.submit()
         }
-    }
+    };
 
 
     submit() {
-        const {name} = this.state;
+        const {name} = this.props.form_handler;
         localStorage.setItem('userName', JSON.stringify(name.value))
     }
 
@@ -34,46 +35,55 @@ export default class IntroPage extends Component {
         })
     }
 
-
     render() {
 
-        const {name} = this.props.state;
-        const {tryToSubmit} = this.state
+        const {name} = this.props.form_handler;
+        const {intro_name} = this.props.state;
+        const {tryToSubmit} = this.state;
 
-        return (
-            <div>
-                Hello, it's the IntroPage
-                <form className=""
-                      onSubmit={()=>this.handleSubmit()}
-                >
+            if(intro_name !== null){
+                    const {referrer} = this.props.location.state;
+                    return <Redirect to={referrer}/>
+            }else {
 
-                    <Input
-                        placeholder="Please enter your name"
-                        name="email"
-                        type="text"
-                        value={name.value}
-                        actions={this.props.actions}
-                        required={true}
-                        fakePlaceholder={true}
-                        {...{tryToSubmit}}
-                    />
+                return (
+                    <div>
+                        Hello, it's the IntroPage
+                        <form className=""
+                              onSubmit={this.handleSubmit}
+                        >
 
-                    <button onClick={()=>this.checkTheForm()}>Enter</button>
-                </form>
+                            <Input
+                                placeholder="Please enter your name"
+                                name="name"
+                                type="text"
+                                value={name.value}
+                                required={true}
+                                fakePlaceholder={true}
+                                {...{tryToSubmit}}
+                            />
 
-            </div>
-        );
+                            <button onClick={() => this.checkTheForm()}>Enter</button>
+                        </form>
+
+                    </div>
+                );
+
+            }
+
+
     }
 }
 
 function mapStateToProps (state) {
     return {
-        state: state.form_handler
+        state: state.app,
+        form_handler: state.form_handler
     }
 }
 
 function mapDispatchToProps (dispatch) {
     return {
-        actions: bindActionCreators(FormHandlerActions, dispatch)
+        actions: bindActionCreators(AppActions, dispatch)
     }
 }

@@ -13,7 +13,7 @@ export default class AuthorizedRoute extends Component {
 
     render () {
         const { component: Component } = this.props;
-        const { name,
+        const { intro_name,
             //pending
         } = this.props.state;
 
@@ -22,7 +22,7 @@ export default class AuthorizedRoute extends Component {
             <Switch>
                 <Route render={props => {
                     //if (pending) return <div>Loading...</div>
-                    return name !== ''
+                    return intro_name !== null
                         ? <Component {...props} />
                         : <Redirect to={{
                             pathname: '/intro/',
@@ -36,8 +36,8 @@ export default class AuthorizedRoute extends Component {
 
     //check user's name
     componentDidMount () {
-        const { name } = this.props.state;
-        if (name === '') {
+        const { intro_name } = this.props.state;
+        if (intro_name === null) {
             let localStorage = window.localStorage;
             this.props.actions.localStorageSubscribe(localStorage)
         }
