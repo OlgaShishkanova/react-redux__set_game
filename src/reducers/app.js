@@ -1,7 +1,36 @@
+import {
+    LOCAL_STORAGE_GET_ITEM,
+    LOCAL_STORAGE_SET_ITEM
+
+} from '../constants/APP'
+
+
 const initialState = {
-    user: 'puka'
+    'intro_name': null,
+    'score': null
 };
 
-export default function userstate(state = initialState) {
-    return state;
+export default function App (state = initialState, action) {
+
+    switch (action.type) {
+
+        case LOCAL_STORAGE_GET_ITEM:{
+            console.log(action.payload.name);
+            return {
+                ...state,
+                [action.payload.name]: JSON.parse(localStorage.getItem(action.payload.name))
+            };
+        }
+
+
+        case LOCAL_STORAGE_SET_ITEM:
+            localStorage.setItem(action.payload.name, JSON.stringify(action.payload.data));
+            return {
+                ...state,
+                [action.payload.name]: action.payload.data
+            };
+
+        default:
+            return state;
+    }
 }
