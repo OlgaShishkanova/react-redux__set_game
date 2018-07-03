@@ -26,7 +26,7 @@ export default class IntroPage extends Component {
 
     submit() {
         const {name} = this.props.form_handler;
-        this.props.actions.localStorageSetItem('userName', name.value)
+        this.props.actions.localStorageSetItem('intro_name', name.value)
     }
 
     //change tryToSubmit for implementation the errors

@@ -6,25 +6,28 @@ import {
 
 
 const initialState = {
-    intro_name: null
+    'intro_name': null,
+    'score': null
 };
 
 export default function App (state = initialState, action) {
 
     switch (action.type) {
 
-        case LOCAL_STORAGE_GET_ITEM:
-
+        case LOCAL_STORAGE_GET_ITEM:{
+            console.log(action.payload.name);
             return {
                 ...state,
-                intro_name: JSON.parse(localStorage.getItem(action.payload.name))
+                [action.payload.name]: JSON.parse(localStorage.getItem(action.payload.name))
             };
+        }
+
 
         case LOCAL_STORAGE_SET_ITEM:
             localStorage.setItem(action.payload.name, JSON.stringify(action.payload.data));
             return {
                 ...state,
-                intro_name: action.payload.data
+                [action.payload.name]: action.payload.data
             };
 
         default:

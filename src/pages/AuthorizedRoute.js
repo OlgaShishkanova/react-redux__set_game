@@ -38,7 +38,7 @@ export default class AuthorizedRoute extends Component {
     componentDidMount () {
         const { intro_name } = this.props.state;
         if (intro_name === null) {
-            this.props.actions.localStorageGetItem('userName')
+            this.props.actions.localStorageGetItem('intro_name')
         }
     }
 }

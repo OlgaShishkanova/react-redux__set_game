@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import {connect} from "react-redux";
+import * as AppActions from "../../actions/AppActions";
+import {bindActionCreators} from "redux";
 
-@connect(mapStateToProps)
+@connect(mapStateToProps, mapDispatchToProps)
 export default class HomePage extends Component {
 
     render () {
@@ -14,9 +16,18 @@ export default class HomePage extends Component {
             </div>
         );
     }
+
+    componentDidMount(){
+        this.props.actions.localStorageSetItem('score', 0)
+    }
 }
 function mapStateToProps (state) {
     return {
         state: state.app,
+    }
+}
+function mapDispatchToProps (dispatch) {
+    return {
+        actions: bindActionCreators(AppActions, dispatch)
     }
 }
