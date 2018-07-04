@@ -21,6 +21,13 @@ module.exports = {
             }
         ]
     },
+    devServer: {
+        port: 3000,
+        open: true,
+        proxy: {
+            "/api": "http://localhost:8080"
+        }
+    },
     plugins: [
         new HtmlWebpackPlugin({
             template: './src/index.html',
@@ -28,4 +35,4 @@ module.exports = {
         }),
         new ExtractTextPlugin('style.css')
     ]
-}
+};
