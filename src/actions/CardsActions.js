@@ -7,13 +7,17 @@ import {
 import axios from 'axios';
 
 
-export function loadCardsData () {
+export function loadCardsData (mode) {
     return (dispatch) => {
         dispatch({
             type: CARDS_DATA_LOAD_START
         });
 
-        axios.get("/api/getdata")
+        axios.get("/api/getdata", {
+            params: {
+                mode: mode
+            }
+        })
             .then((response) => {
                 dispatch({
                     type: CARDS_DATA_LOAD_END,

@@ -20,7 +20,7 @@ export default class HomePage extends Component {
 
     componentDidMount(){
         this.props.actions.localStorageSetItem('score', 0);
-        this.props.cardsActions.loadCardsData();
+        this.props.cardsActions.loadCardsData('nice');
 
     }
 }
