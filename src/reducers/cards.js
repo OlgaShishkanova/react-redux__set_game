@@ -5,7 +5,7 @@ import {
 } from '../constants/CARDS'
 
 const initialState = {
-    data: {},
+    data: [],
     isAjax: false,
     empty: true
 };
