@@ -1,9 +1,10 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import {connect} from "react-redux";
 import * as AppActions from "../../actions/AppActions";
 import * as CardsActions from "../../actions/CardsActions";
 import {bindActionCreators} from "redux";
 import ModeForm from "../../containers/Mode/ModeForm";
+import CardsContainer from "../../containers/Cards/CardsContainer";
 
 @connect(mapStateToProps, mapDispatchToProps)
 export default class HomePage extends Component {
@@ -16,11 +17,13 @@ export default class HomePage extends Component {
 
         return (
             <div>
-                Hello, {intro_name}, it's HomePage
                 {data.length === 0 ?
-                    <ModeForm/>
+                    <Fragment>
+                        Hello, {intro_name}!
+                        <ModeForm/>
+                    </Fragment>
                     :
-                    <div>карточки</div>
+                    <CardsContainer data={data}/>
                 }
             </div>
         );
