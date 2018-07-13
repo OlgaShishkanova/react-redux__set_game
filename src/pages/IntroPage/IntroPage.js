@@ -4,6 +4,9 @@ import {bindActionCreators} from "redux";
 import { Redirect } from 'react-router-dom'
 import Input from "../../components/Base/Input"
 import * as AppActions from "../../actions/AppActions";
+import './IntroPage.scss'
+import '../../css/btn.scss'
+import '../../css/title.scss'
 
 @connect(mapStateToProps, mapDispatchToProps)
 
@@ -48,9 +51,9 @@ export default class IntroPage extends Component {
             }else {
 
                 return (
-                    <div>
-                        Hello, it's the IntroPage
-                        <form className=""
+                    <div className='wrapper'>
+                        <div className='main_title'>Hello, honorable Stranger</div>
+                        <form className="intro_from"
                               onSubmit={this.handleSubmit}
                         >
 
@@ -64,7 +67,7 @@ export default class IntroPage extends Component {
                                 {...{tryToSubmit}}
                             />
 
-                            <button onClick={() => this.checkTheForm()}>Enter</button>
+                            <button className='usual_btn' onClick={() => this.checkTheForm()}>Enter</button>
                         </form>
 
                     </div>

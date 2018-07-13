@@ -5,6 +5,8 @@ import PropTypes from 'prop-types'
 import ErrorsHandler from './ErrorsHandler'
 import * as FormHandlerActions from "../../actions/FormHandlerActions";
 import {connect} from "react-redux";
+import './Input.scss'
+
 
 @connect(null, mapDispatchToProps)
 export default class Input extends PureComponent {

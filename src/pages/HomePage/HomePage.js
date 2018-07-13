@@ -5,6 +5,7 @@ import * as CardsActions from "../../actions/CardsActions";
 import {bindActionCreators} from "redux";
 import ModeForm from "../../containers/Mode/ModeForm";
 import CardsContainer from "../../containers/Cards/CardsContainer";
+import './HomePage.scss'
 
 @connect(mapStateToProps, mapDispatchToProps)
 export default class HomePage extends Component {
@@ -16,10 +17,10 @@ export default class HomePage extends Component {
         const {data} = this.props.cards;
 
         return (
-            <div>
+            <div className='home_wrapper'>
                 {data.length === 0 ?
                     <Fragment>
-                        Hello, {intro_name}!
+                        <div className='main_title'>Hello, {intro_name}!</div>
                         <ModeForm/>
                     </Fragment>
                     :

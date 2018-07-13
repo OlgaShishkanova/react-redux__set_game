@@ -1,0 +1,15 @@
+@import '../../css/variables.scss';
+
+input[type=text]{
+  width: 100%;
+  border: 2px solid $brightPurple;
+  box-shadow: none;
+  padding: .5rem 1rem;
+  height: 5rem;
+  line-height: 5rem;
+  color: $brightPurple;
+  background: $cGrey;
+  &:focus{
+    border: 2px solid $brightOrange;
+  }
+}
