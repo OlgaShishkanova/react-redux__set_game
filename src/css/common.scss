@@ -24,7 +24,6 @@ button, input, select, textarea {
 
 html {
   font-size: 10px;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   overflow-y: scroll;
 }
 
@@ -33,13 +32,13 @@ body {
   font-size: $font-size-base;
   line-height: $line-height-base;
   color: $text-color;
-  background-color: #fff;
+  background-color: $orangeGrey;
 }
 
 a {
-  color: #e54a4b;
+  color: $brightPurple;
   &:hover {
-    color: #b59852;
+    color: $brightOrange;
   }
 }
 
@@ -52,7 +51,7 @@ h1 {
 }
 
 h2 {
-  color: black;
+  color: $text-color;
   font-size: 2.5rem;
   font-weight: 900;
   line-height: 3rem;
@@ -60,7 +59,7 @@ h2 {
 }
 
 h3 {
-  color: black;
+  color: $text-color;
   font-size: 1.5rem;
   font-weight: 700;
   line-height: 2.8rem;

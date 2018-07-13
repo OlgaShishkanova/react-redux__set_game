@@ -14,7 +14,7 @@ export default class ModeForm extends Component {
 
         return (
             <div>
-                <div>Please, choose the mode (appearance for the cards)</div>
+                <div>Please, choose the mode</div>
                 <form onSubmit={this.handleFormSubmit}>
                     <div className="radio">
                         <label>

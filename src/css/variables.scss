@@ -2,20 +2,24 @@
 $pathToImg: "/images/";
 
 /* Colors */
-$cGold: #c8af72;
-$cGoldDark: #b59852;
-$cRed: #e54b4b;
-$cBrightRed: #ff0012;
 $cGrey: #f2f2f2;
-$cBoldGrey: #eee;
-$cWhite: white;
-$cBlBack: black;
-$cDark: #333333;
+$grey: #eee;
+$white: white;
+$black: black;
+$orangeGrey: #A5998F;
+$purple: #554A73;
+$brightPurple: #432F75;
+$orange: #AA6F39;
+$brightOrange: #AD590B;
+$green: #789D34;
+$brightGreen: #66A200;
+
+
 $transitionTime: 0.2s;
 
 $animTime: 0.5s;
 
-$font-family-base: LatoWeb, sans-seref;
+$font-family-base: 'Amatic SC', cursive;
 $font-size-base: 1.4rem;
 $line-height-base: 1.5;
 $text-color: #000;
