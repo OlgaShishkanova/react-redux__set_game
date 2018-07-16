@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Card from "./Card";
 
+
 export default class CardsContainer extends Component {
 
 
@@ -9,7 +10,7 @@ export default class CardsContainer extends Component {
         const {data} = this.props;
 
         return (
-            <div>
+            <div className='cards'>
                 {data.map((item, key) =>
                     <Card {...item} key={key}/>
                 )}

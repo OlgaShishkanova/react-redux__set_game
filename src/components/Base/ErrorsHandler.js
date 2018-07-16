@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import './ErrorsHandler.scss'
+import '../../css/blocks/ErrorsHandler.scss'
 import PropTypes from 'prop-types'
 
 export default class ErrorsHandler extends PureComponent {

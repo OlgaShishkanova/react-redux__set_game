@@ -4,9 +4,6 @@ import {bindActionCreators} from "redux";
 import { Redirect } from 'react-router-dom'
 import Input from "../../components/Base/Input"
 import * as AppActions from "../../actions/AppActions";
-import './IntroPage.scss'
-import '../../css/btn.scss'
-import '../../css/title.scss'
 
 @connect(mapStateToProps, mapDispatchToProps)
 

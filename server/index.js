@@ -23,13 +23,15 @@ generateCards = (name,data) => {
     let forms = ['rectangle', 'circle', 'rhombus'];
     let fullness = ['empty', 'full', 'partly'];
     let cards = [];
+    let id = 1;
 
 
     data.forEach((item) => {
         numbers.forEach((number) => {
             forms.forEach((form) => {
                 fullness.forEach((fullness) => {
-                    cards = [...cards, {[name]: item, number: number, form: form, fullness: fullness}]
+                    cards = [...cards, {[name]: item, id: id, number: number, form: form, fullness: fullness}];
+                    id++;
                 });
             });
         });

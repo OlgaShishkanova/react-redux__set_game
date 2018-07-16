@@ -10,7 +10,7 @@ export default class Card extends Component {
     render () {
 
         return (
-            <div>
+            <div className='cards-item'>
 
             </div>
         );

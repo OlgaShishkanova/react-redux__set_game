@@ -1,0 +1,15 @@
+@import './variables.scss';
+
+.usual_btn {
+  margin-top: 3rem;
+  background: $brightOrange;
+  font-weight: bold;
+  border: 2px solid $brightOrange;
+  color: $cGrey;
+  &:hover,
+  &:active{
+    background: $cGrey;
+    border: 2px solid $brightPurple;
+    color: $black;
+  }
+}

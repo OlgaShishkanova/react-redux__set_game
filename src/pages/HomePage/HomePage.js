@@ -5,7 +5,6 @@ import * as CardsActions from "../../actions/CardsActions";
 import {bindActionCreators} from "redux";
 import ModeForm from "../../containers/Mode/ModeForm";
 import CardsContainer from "../../containers/Cards/CardsContainer";
-import './HomePage.scss'
 
 @connect(mapStateToProps, mapDispatchToProps)
 export default class HomePage extends Component {

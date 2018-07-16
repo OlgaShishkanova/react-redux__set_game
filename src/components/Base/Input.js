@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import ErrorsHandler from './ErrorsHandler'
 import * as FormHandlerActions from "../../actions/FormHandlerActions";
 import {connect} from "react-redux";
-import './Input.scss'
+import '../../css/blocks/Input.scss'
 
 
 @connect(null, mapDispatchToProps)

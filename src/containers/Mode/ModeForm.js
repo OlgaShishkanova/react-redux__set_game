@@ -3,7 +3,6 @@ import {connect} from "react-redux";
 import * as CardsActions from "../../actions/CardsActions";
 import {bindActionCreators} from "redux";
 import classNames from 'classnames'
-import './ModeForm.scss'
 
 @connect(null, mapDispatchToProps)
 export default class ModeForm extends Component {
