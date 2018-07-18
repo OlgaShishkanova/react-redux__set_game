@@ -15,5 +15,26 @@
 }
 .cards-item{
   align-self: stretch;
-  background: aquamarine;
+  background: $cGrey;
+  border: 2px solid $grey;
+  border-radius: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__form{
+    width: 10rem;
+    height: 5rem;
+    border: 2px solid;
+    &.rectangle{
+      border-radius: 3rem;
+    }
+    &.circle{
+      width: 5rem;
+      border-radius: 100%;
+    }
+    &.rhombus {
+      width: 5rem;
+      transform: rotate(135deg) skew(20deg, 20deg);
+    }
+  }
 }

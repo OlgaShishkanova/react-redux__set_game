@@ -5,11 +5,11 @@ app.get('/', (req, res) => res.send('Hello World!'));
 app.get('/api/getdata', (req, res) => {
     let params = req.query.mode;
     if(params==='classic'){
-        let colors = ['red', 'blue', 'green'];
+        let colors = ['#AD590B', '#432F75', '#66A200'];
         res.send(generateCards('colors',colors))
     }
     if(params==='nice'){
-        let images = ['dog', 'cat', 'fox'];
+        let images = ['../images/dog', '../images/cat', '../images/fox'];
         res.send(generateCards('images',images))
     }
 });
