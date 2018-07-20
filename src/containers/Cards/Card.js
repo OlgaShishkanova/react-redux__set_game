@@ -22,7 +22,8 @@ export default class Card extends Component {
                          className={classNames('cards-item__form', `${form}`, `${fullness}`, `${colors}`)}
                          style={{borderColor: colors}}>
                         {images &&
-                        <img src={images}/>
+                        <div className={classNames('cards-item__form-img', `${images}`)}/>
+
                         }
                     </div>
                 )}

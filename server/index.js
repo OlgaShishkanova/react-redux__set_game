@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 
+app.use(express.static('../public'));
 app.get('/', (req, res) => res.send('Hello World!'));
 app.get('/api/getdata', (req, res) => {
     let params = req.query.mode;
@@ -9,7 +10,7 @@ app.get('/api/getdata', (req, res) => {
         res.send(generateCards('colors',colors))
     }
     if(params==='nice'){
-        let images = ['../images/dog', '../images/cat', '../images/fox'];
+        let images = ['dog', 'cat', 'fox'];
         res.send(generateCards('images',images))
     }
 });
