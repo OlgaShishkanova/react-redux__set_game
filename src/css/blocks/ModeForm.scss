@@ -1,7 +1,7 @@
 @import '../variables';
 
 .mode_form{
-  width: 40rem;
+  width: 45rem;
   margin: 0 auto;
   font-size: 2.5rem;
   &__wrapper{
@@ -18,13 +18,37 @@
   }
   &__custom-radio{
     background: $cGrey;
-    width: 15rem;
-    height: 15rem;
+    width: 20rem;
+    height: 20rem;
     display: block;
     border-radius: 1rem;
     border: 2px solid $brightGreen;
+    font-weight: bold;
     &:hover{
       border: 2px solid $brightOrange;
+    }
+    &.checked{
+      border: 2px solid $brightPurple;
+      background: rgba(255,255,255,0.4);
+    }
+  }
+  &__card{
+    &-classic{
+      width: 15rem;
+      height: 22rem;
+      transform: scale(.5);
+      background: $cGrey;
+      border: 2px solid $orangeGrey;
+      border-radius: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: -3rem auto 0;
+    }
+    &-wrapper{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
   }
 }

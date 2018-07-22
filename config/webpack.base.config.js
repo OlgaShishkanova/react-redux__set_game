@@ -19,28 +19,6 @@ module.exports = {
                     use: "css-loader!sass-loader",
                 })
             },
-            // {
-            //     test: /.*\.(gif|png|jpe?g)$/i,
-            //     use: [
-            //         {
-            //             loader: 'url-loader',
-            //             options: {
-            //                 limit: 8000,
-            //             },
-            //         },
-            //     ]
-            // },
-            {
-                test: /\.(png|jp(e*)g|svg)$/,
-                use: [
-                    {
-                        loader: 'file-loader',
-                        options: {
-                            name: '/public/images/[name]_[hash:7].[ext]',
-                        }
-                    },
-                ]
-            }
         ]
     },
     devServer: {

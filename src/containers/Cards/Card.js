@@ -19,10 +19,12 @@ export default class Card extends Component {
                 <div>
                 {arr.map((item, key) =>
                     <div key={key}
-                         className={classNames('cards-item__form', `${form}`, `${fullness}`, `${colors}`)}
-                         style={{borderColor: colors}}>
+                         className={classNames('cards-item__form', `${form}`,
+                             `${fullness}`, images ? `${images}` : '')}
+                         style={{borderColor: colors,
+                             backgroundColor: fullness==='full' || fullness==='partly' ? colors : 'transparent'}}>
                         {images &&
-                        <div className={classNames('cards-item__form-img', `${images}`)}/>
+                        <div className={classNames('cards-item__form-img', `${images}`, `${fullness}`)}/>
 
                         }
                     </div>

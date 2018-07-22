@@ -23,7 +23,21 @@ export default class ModeForm extends Component {
                                 <input type="radio" value="classic"
                                        checked={this.state.selectedOption === 'classic'}
                                        onChange={this.handleOptionChange}/>
-                                <span className='mode_form__custom-radio'>Classic one</span>
+                                <span className={classNames('mode_form__custom-radio', this.state.selectedOption === 'classic' ?
+                                'checked' : '')}>Classic one
+                                  <div className='mode_form__card-classic'>
+                                    <div className='mode_form__card-wrapper'>
+                                    <div className='cards-item__form rectangle empty'
+                                         style={{borderColor: '#432F75'}}/>
+                                    <div className='cards-item__form rhombus partly'
+                                         style={{borderColor: '#AD590B',
+                                             backgroundColor: '#AD590B' }}/>
+                                    <div className='cards-item__form circle full'
+                                         style={{borderColor: '#66A200',
+                                             backgroundColor: '#66A200'}}/>
+                                    </div>
+                                </div>
+                                </span>
                             </label>
                         </div>
                         <div className="mode_form__wrapper-radio">
@@ -32,7 +46,25 @@ export default class ModeForm extends Component {
                                        checked={this.state.selectedOption === 'nice'}
                                        onChange={this.handleOptionChange}/>
 
-                                <span className='mode_form__custom-radio'>Cute one</span>
+                                <span className={classNames('mode_form__custom-radio', this.state.selectedOption === 'nice' ?
+                                    'checked' : '')}>Cute one
+                                <div className='mode_form__card-classic'>
+                                    <div className='mode_form__card-wrapper'>
+                                        <div className='cards-item__form rectangle dog'>
+                                             <div className={classNames('cards-item__form-img', 'dog', 'empty')}/>
+
+                                        </div>
+                                        <div className='cards-item__form rhombus partly fox'>
+                                             <div className={classNames('cards-item__form-img', 'fox')}/>
+                                        </div>
+                                        <div className='cards-item__form circle cat'>
+                                             <div className={classNames('cards-item__form-img', 'cat')}/>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                </span>
                             </label>
                         </div>
                     </div>

@@ -23,39 +23,82 @@
   align-items: center;
   &__form{
     width: 10rem;
-    height: 5rem;
+    height: 5.4rem;
     border: 2px solid;
+    overflow: hidden;
     &:nth-child(2){
       margin: 1rem 0 0;
     }
     &:nth-child(3){
       margin: 1rem 0 0;
     }
+    &.dog{
+      border: 2px solid $brightGreen;
+    }
+    &.cat{
+      border: 2px solid $brightPurple;
+    }
+    &.fox{
+      border: 2px solid $brightOrange;
+    }
     &.rectangle{
-      border-radius: 3rem;
     }
     &.circle{
-      width: 5rem;
-      border-radius: 100%;
+      border-radius: 3rem;
     }
     &.rhombus {
-      width: 5rem;
+      width: 5.4rem;
       transform: rotate(135deg) skew(20deg, 20deg);
+      .cards-item__form-img{
+        transform: rotate(-135deg) skew(0, 0) scale(1.5);
+      }
+    }
+    &.partly{
+      position: relative;
+      &::before{
+        content: '';
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 3;
+        background: repeating-linear-gradient(
+                        180deg,
+                        rgba(255,255,255,0.8),
+                        rgba(255,255,255,0.8) 1rem,
+                        transparent 1rem,
+                        transparent 2rem
+        );
+      }
+      &.rhombus{
+        &::before{
+          background: repeating-linear-gradient(
+                          45deg,
+                          rgba(255,255,255,0.8),
+                          rgba(255,255,255,0.8) 1rem,
+                          transparent 1rem,
+                          transparent 2rem
+          );
+        }
+      }
     }
     &-img{
       background-repeat: no-repeat;
       background-size: cover;
-      background-position: center;
+      background-position: center right;
       width: 100%;
       height: 100%;
+      &.empty{
+        opacity: .2;
+      }
       &.dog{
-        background-image: url('/images/dog.jpg');
+        background-image: url('/public/images/dog.jpg');
       }
       &.cat{
-        background-image: url('/images/cat.jpg');
+        background-image: url('/public/images/cat.jpg');
       }
       &.fox{
-        background-image: url('/images/fox.jpg');
+        background-image: url('/public/images/fox.jpg');
       }
     }
   }
