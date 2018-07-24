@@ -1,11 +1,13 @@
 import {
     CARDS_DATA_LOAD_START,
-    CARDS_DATA_LOAD_END
+    CARDS_DATA_LOAD_END,
+    CARDS_GET_RANDOM_CARDS
 
 } from '../constants/CARDS'
 
 const initialState = {
     data: [],
+    pieceOfCards: [],
     isAjax: false,
     empty: true
 };
@@ -23,6 +25,9 @@ export default function Cards (state = initialState, action) {
                 isAjax: false,
                 empty: false
             };
+
+        case CARDS_GET_RANDOM_CARDS:
+            return { ...state, pieceOfCards: action.payload };
 
         default:
             return state

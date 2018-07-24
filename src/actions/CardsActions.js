@@ -1,6 +1,7 @@
 import {
     CARDS_DATA_LOAD_START,
-    CARDS_DATA_LOAD_END
+    CARDS_DATA_LOAD_END,
+    CARDS_GET_RANDOM_CARDS
 
 } from '../constants/CARDS'
 
@@ -34,5 +35,29 @@ export function loadCardsData (mode) {
                 }
 
             })
+    }
+}
+
+export function getRandomCards(number) {
+    return (dispatch, getState) => {
+
+        const {data} = getState().cards;
+        let setOfCards = [];
+        let removeFromData = [];
+
+        Array.from(number).forEach((item) => {
+            let rand = data[Math.floor(Math.random() * data.length)];
+            removeFromData = data.filter(el => el !== rand);
+            setOfCards = [...setOfCards, rand];
+            console.log(item)
+        });
+
+        console.log(setOfCards, removeFromData);
+
+
+        dispatch({
+            type: CARDS_GET_RANDOM_CARDS,
+            payload: setOfCards
+        })
     }
 }
