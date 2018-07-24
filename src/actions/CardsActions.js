@@ -43,16 +43,16 @@ export function getRandomCards(number) {
 
         const {data} = getState().cards;
         let setOfCards = [];
-        let removeFromData = [];
+        let copyOfData = [...data];
 
         Array.from(number).forEach((item) => {
             let rand = data[Math.floor(Math.random() * data.length)];
-            removeFromData = data.filter(el => el !== rand);
+            copyOfData = data.filter(el => el !== rand);
             setOfCards = [...setOfCards, rand];
             console.log(item)
         });
 
-        console.log(setOfCards, removeFromData);
+        console.log(setOfCards, copyOfData);
 
 
         dispatch({
