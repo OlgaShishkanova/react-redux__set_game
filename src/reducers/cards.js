@@ -1,7 +1,7 @@
 import {
     CARDS_DATA_LOAD_START,
     CARDS_DATA_LOAD_END,
-    CARDS_GET_RANDOM_CARDS
+    CARDS_GET_RANDOM_ITEMS
 
 } from '../constants/CARDS'
 
@@ -26,8 +26,11 @@ export default function Cards (state = initialState, action) {
                 empty: false
             };
 
-        case CARDS_GET_RANDOM_CARDS:
-            return { ...state, pieceOfCards: action.payload };
+        case CARDS_GET_RANDOM_ITEMS:
+            return { ...state,
+                data: action.payload.reducedData,
+                pieceOfCards: action.payload.pieceOfCards
+            };
 
         default:
             return state

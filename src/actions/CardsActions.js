@@ -1,7 +1,7 @@
 import {
     CARDS_DATA_LOAD_START,
     CARDS_DATA_LOAD_END,
-    CARDS_GET_RANDOM_CARDS
+    CARDS_GET_RANDOM_ITEMS
 
 } from '../constants/CARDS'
 
@@ -41,23 +41,23 @@ export function loadCardsData (mode) {
 export function getRandomCards(number) {
     return (dispatch, getState) => {
 
-        const {data} = getState().cards;
-        let setOfCards = [];
-        let copyOfData = [...data];
+        //const {data} = getState().cards;
+        let pieceOfCards = [];
+        let reducedData = [...getState().cards.data];
+        let arr = [...Array(number).keys()];
 
-        Array.from(number).forEach((item) => {
-            let rand = data[Math.floor(Math.random() * data.length)];
-            copyOfData = data.filter(el => el !== rand);
-            setOfCards = [...setOfCards, rand];
-            console.log(item)
+        arr.forEach(() => {
+            let rand = reducedData[Math.floor(Math.random() * reducedData.length)];
+            reducedData = reducedData.filter(el => el !== rand);
+            pieceOfCards = [...pieceOfCards, rand];
         });
 
-        console.log(setOfCards, copyOfData);
+        console.log(pieceOfCards, reducedData);
 
 
         dispatch({
-            type: CARDS_GET_RANDOM_CARDS,
-            payload: setOfCards
+            type: CARDS_GET_RANDOM_ITEMS,
+            payload: {pieceOfCards, reducedData}
         })
     }
 }
