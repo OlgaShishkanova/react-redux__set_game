@@ -23,7 +23,7 @@ export default class HomePage extends Component {
                         <ModeForm/>
                     </Fragment>
                     :
-                    <CardsContainer data={data}/>
+                    <CardsContainer/>
                 }
             </div>
         );

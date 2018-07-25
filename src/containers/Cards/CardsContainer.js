@@ -10,13 +10,17 @@ export default class CardsContainer extends Component {
 
     render () {
 
-        const {data} = this.props;
+        const {pieceOfCards} = this.props.state;
 
         return (
-            <div className='cards'>
-                {data.map((item, key) =>
-                    <Card {...item} key={key}/>
-                )}
+            <div>
+                {pieceOfCards &&
+                <div className='cards'>
+                    {pieceOfCards.map((item, key) =>
+                        <Card {...item} key={key}/>
+                    )}
+                </div>
+                }
             </div>
         );
     }
@@ -27,7 +31,7 @@ export default class CardsContainer extends Component {
 }
 function mapStateToProps (state) {
     return {
-        cards: state.cards
+        state: state.cards
     }
 }
 function mapDispatchToProps (dispatch) {
