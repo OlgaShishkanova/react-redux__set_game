@@ -8,7 +8,7 @@ import {bindActionCreators} from "redux";
 export default class CardsContainer extends Component {
 
 
-    render () {
+    render() {
 
         const {pieceOfCards} = this.props.state;
 
@@ -17,7 +17,7 @@ export default class CardsContainer extends Component {
                 {pieceOfCards &&
                 <div className='cards'>
                     {pieceOfCards.map((item, key) =>
-                        <Card {...item} key={key}/>
+                        <Card item={item} key={key}/>
                     )}
                 </div>
                 }
@@ -25,9 +25,18 @@ export default class CardsContainer extends Component {
         );
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.props.actions.getRandomCards(12)
     }
+
+    componentDidUpdate(prevProps) {
+
+        if (this.props.state.chosenCards !== prevProps.state.chosenCards && this.props.state.chosenCards.length === 3) {
+            this.props.actions.checkSet()
+        }
+    }
+
+
 }
 function mapStateToProps (state) {
     return {

@@ -21,6 +21,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+  &:hover{
+    background: $orangeGrey;
+  }
+  &.chosen{
+    background: $orangeGrey;
+  }
   &__form{
     width: 10rem;
     height: 5.4rem;
