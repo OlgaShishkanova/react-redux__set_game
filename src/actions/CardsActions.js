@@ -3,8 +3,9 @@ import {
     CARDS_DATA_LOAD_END,
     CARDS_GET_RANDOM_ITEMS,
     CARDS_ADD_ITEMS,
-    CARDS_REMOVE_ITEMS
-    //CARDS_CHECK_SET
+    CARDS_REMOVE_ITEMS,
+    CARDS_CHECK_SET_RIGHT,
+    CARDS_CHECK_SET_WRONG
 
 } from '../constants/CARDS'
 
@@ -80,34 +81,67 @@ export function toggleCards(item) {
     }
 }
 
+export function removeCardsOfRightSet(getState) {
+
+
+        let pieceOfCards = getState().cards.pieceOfCards;
+        let chosenCards = getState().cards.chosenCards;
+
+        chosenCards.map((item) => {
+            pieceOfCards =  pieceOfCards.filter(i => i.id !== item.id);
+        });
+    return pieceOfCards
+}
+
 export function checkSet() {
     return (dispatch, getState) => {
 
         let chosenCards = getState().cards.chosenCards;
+        let arrOfItems = [chosenCards[0].colors ? 'colors': 'images', 'number', 'form', 'fullness'];
+        let result = [];
 
-        if(chosenCards[0].colors === chosenCards[1].colors && chosenCards[1].colors === chosenCards[2].colors
-            // && (а по остальным признакам должны быть неравны или тоже равны)
-            //надо короч перебирать все свойства и если у 1 и 2 они равны, то и у 3го должно быть такое же, если
-                // 1 и 2 не равны, то и 3 не должен быть
-            || chosenCards[0].number === chosenCards[1].number && chosenCards[1].number === chosenCards[2].number
-            || chosenCards[0].form === chosenCards[1].form && chosenCards[1].form === chosenCards[2].form
-            || chosenCards[0].fullness === chosenCards[1].fullness && chosenCards[1].fullness === chosenCards[2].fullness
-            ||
-            (chosenCards[0].colors !== chosenCards[1].colors && chosenCards[1].colors !== chosenCards[2].colors && chosenCards[0].colors !== chosenCards[2].colors
-            && chosenCards[0].number !== chosenCards[1].number && chosenCards[1].number !== chosenCards[2].number && chosenCards[0].number !== chosenCards[2].number
-            && chosenCards[0].form !== chosenCards[1].form && chosenCards[1].form !== chosenCards[2].form && chosenCards[0].form !== chosenCards[2].form
-            && chosenCards[0].fullness !== chosenCards[1].fullness && chosenCards[1].fullness !== chosenCards[2].fullness && chosenCards[0].fullness !== chosenCards[2].fullness
-            )
-        ){
-            console.log('правильно епта')
+        arrOfItems.forEach((item) => {
+            if(chosenCards[0][item] === chosenCards[1][item]){
+                if(chosenCards[1][item] === chosenCards[2][item]){
+                    result = [...result, true]
+                }else{
+                    return false
+                }
+            }
+            if(chosenCards[0][item] !== chosenCards[1][item]){
+                if(chosenCards[1][item] !== chosenCards[2][item]){
+                    if(chosenCards[0][item] !== chosenCards[2][item]){
+                        result = [...result, true]
+                    }else{
+                        return false
+                    }
+                }else{
+                    return false
+                }
+            }
+        });
+
+        if(result.length === 4){
+            let promise = new Promise((resolve) => {
+                resolve(
+                    dispatch({
+                        type: CARDS_CHECK_SET_RIGHT,
+                        payload: {score: 1, reducedData: removeCardsOfRightSet(getState)}
+                    })
+                )
+
+            });
+            promise.then(() => {
+                this.getRandomCards(3)
+            })
+
         }else{
-            console.log('неправильно, уеба')
+            dispatch({
+                type: CARDS_CHECK_SET_WRONG,
+                payload: 1
+            })
         }
 
-
-        // chosenCards.forEach((item) => {
-        //
-        // });
     }
 }
 

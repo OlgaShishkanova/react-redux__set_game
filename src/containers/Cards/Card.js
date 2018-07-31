@@ -44,6 +44,15 @@ export default class Card extends Component {
         this.props.actions.toggleCards(this.props.item)
     };
 
+   componentDidUpdate(prevProps){
+        if(this.props.cards.score !== prevProps.cards.score && this.state.chosen
+        || this.props.cards.mistakes !== prevProps.cards.mistakes && this.state.chosen) {
+            this.setState({
+                chosen: false
+            });
+        }
+
+    }
 
 }
 function mapStateToProps (state) {
