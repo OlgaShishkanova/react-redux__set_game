@@ -84,19 +84,21 @@ export function toggleCards(item) {
 export function removeCardsOfRightSet(getState) {
 
 
-        let pieceOfCards = getState().cards.pieceOfCards;
-        let chosenCards = getState().cards.chosenCards;
+    let pieceOfCards = getState().cards.pieceOfCards;
+    let chosenCards = getState().cards.chosenCards;
 
-        chosenCards.map((item) => {
-            pieceOfCards =  pieceOfCards.filter(i => i.id !== item.id);
-        });
+    chosenCards.map((item) => {
+        pieceOfCards = pieceOfCards.filter(i => i.id !== item.id);
+    });
     return pieceOfCards
 }
+
 
 export function checkSet() {
     return (dispatch, getState) => {
 
         let chosenCards = getState().cards.chosenCards;
+        let data = getState().cards.data;
         let arrOfItems = [chosenCards[0].colors ? 'colors': 'images', 'number', 'form', 'fullness'];
         let result = [];
 
@@ -121,19 +123,15 @@ export function checkSet() {
             }
         });
 
-        if(result.length === 4){
-            let promise = new Promise((resolve) => {
-                resolve(
-                    dispatch({
-                        type: CARDS_CHECK_SET_RIGHT,
-                        payload: {score: 1, reducedData: removeCardsOfRightSet(getState)}
-                    })
-                )
+        if(result.length === 4) {
 
+            dispatch({
+                type: CARDS_CHECK_SET_RIGHT,
+                payload: {score: 1, reducedData: removeCardsOfRightSet(getState)}
             });
-            promise.then(() => {
-                this.getRandomCards(3)
-            })
+            if(data.length>3){
+                this.getRandomCards(3);
+            }
 
         }else{
             dispatch({

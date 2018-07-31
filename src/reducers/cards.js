@@ -58,7 +58,6 @@ export default function Cards (state = initialState, action) {
             return {
                 ...state,
                 score: state.score + action.payload.score,
-                isSetRight: action.payload.score,
                 pieceOfCards:  action.payload.reducedData,
                 chosenCards: []
             };
