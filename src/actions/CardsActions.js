@@ -98,6 +98,7 @@ export function checkSet() {
     return (dispatch, getState) => {
 
         let chosenCards = getState().cards.chosenCards;
+        let pieceOfCards = getState().cards.pieceOfCards;
         let data = getState().cards.data;
         let arrOfItems = [chosenCards[0].colors ? 'colors': 'images', 'number', 'form', 'fullness'];
         let result = [];
@@ -129,7 +130,7 @@ export function checkSet() {
                 type: CARDS_CHECK_SET_RIGHT,
                 payload: {score: 1, reducedData: removeCardsOfRightSet(getState)}
             });
-            if(data.length>3){
+            if(data.length>3 && pieceOfCards.length<12){
                 this.getRandomCards(3);
             }
 

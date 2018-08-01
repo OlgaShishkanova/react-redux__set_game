@@ -3,6 +3,7 @@ import Card from "./Card";
 import {connect} from "react-redux";
 import * as CardsActions from "../../actions/CardsActions";
 import {bindActionCreators} from "redux";
+import classNames from 'classnames'
 
 @connect(mapStateToProps, mapDispatchToProps)
 export default class CardsContainer extends Component {
@@ -15,7 +16,7 @@ export default class CardsContainer extends Component {
         return (
             <div>
                 {pieceOfCards &&
-                <div className='cards'>
+                <div className={classNames('cards', pieceOfCards.length === 15 && 'wide')}>
                     {pieceOfCards.map((item, key) =>
                         <Card item={item} key={key}/>
                     )}

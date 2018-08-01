@@ -24,8 +24,8 @@ export default class HomePage extends Component {
         const {message, isAlert, isRight} = this.state;
 
         return (
-            <div className='home_wrapper'>
-                {data.length === 0 ?
+            <div className='home__wrapper'>
+                {data && data.length === 0 ?
                     <Fragment>
                         <div className='main_title'>Hello, {intro_name}!</div>
                         <ModeForm/>
@@ -37,12 +37,28 @@ export default class HomePage extends Component {
                         <div>Your mistakes: <span>{mistakes}</span></div>
                         </div>
                         <div className={classNames('alert', isAlert && 'show', isRight? 'yes': 'no')}>{message}</div>
+                        <div className='home__buttons'>
+                            <button className={classNames('usual_btn', this.props.cards.pieceOfCards.length > 12 && 'disabled')} onClick={this.addCards}>Add 3 cards</button>
+                            <button className='usual_btn' onClick={this.getTip}>Get a tip</button>
+                        </div>
                     <CardsContainer/>
                     </Fragment>
                 }
             </div>
         );
     }
+
+    addCards = (e) => {
+        e.preventDefault();
+        if(this.props.cards.pieceOfCards && this.props.cards.pieceOfCards.length === 12){
+            this.props.cardsActions.getRandomCards(3)
+        }
+    };
+
+    getTip = (e) => {
+        e.preventDefault();
+    };
+
 
     componentDidMount(){
         this.props.actions.localStorageSetItem('score', 0);
