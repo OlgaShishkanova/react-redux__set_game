@@ -5,7 +5,8 @@ import {
     CARDS_ADD_ITEMS,
     CARDS_REMOVE_ITEMS,
     CARDS_CHECK_SET_RIGHT,
-    CARDS_CHECK_SET_WRONG
+    CARDS_CHECK_SET_WRONG,
+    CARDS_SHOW_TIP
 
 } from '../constants/CARDS'
 
@@ -93,6 +94,44 @@ export function removeCardsOfRightSet(getState) {
     return pieceOfCards
 }
 
+export function getTip() {
+    return (dispatch, getState) => {
+
+        let pieceOfCards = getState().cards.pieceOfCards;
+        let arrOfItems = [pieceOfCards[0].colors ? 'colors': 'images', 'number', 'form', 'fullness'];
+        let result = [];
+        let ids = [];
+        let prevCards = {};
+
+        pieceOfCards.reduce((accumulator, currentValue) => {
+
+            if(result.length<4){
+                arrOfItems.forEach((item) => {
+                    if (accumulator[item] === currentValue[item] === prevCards[item]) {
+                        result = [...result, true]
+                    }
+
+                    if (accumulator[item] !== currentValue[item]) {
+                        if (prevCards[item] !== undefined && prevCards[item] !== currentValue[item]) {
+                            if (prevCards[item] !== undefined && prevCards[item] !== accumulator[item]) {
+                                result = [...result, true]
+                            }
+                        }
+                    }
+                });
+                prevCards = accumulator;
+            }else{
+                ids = [accumulator.id, currentValue.id, prevCards.id];
+            }
+            return currentValue;
+        });
+
+        dispatch({
+            type: CARDS_SHOW_TIP,
+            payload: ids
+        })
+    }
+}
 
 export function checkSet() {
     return (dispatch, getState) => {

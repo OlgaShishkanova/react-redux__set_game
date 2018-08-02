@@ -16,7 +16,7 @@ export default class CardsContainer extends Component {
         return (
             <div>
                 {pieceOfCards &&
-                <div className={classNames('cards', pieceOfCards.length === 15 && 'wide')}>
+                <div className={classNames('cards', {wide: pieceOfCards.length === 15})}>
                     {pieceOfCards.map((item, key) =>
                         <Card item={item} key={key}/>
                     )}

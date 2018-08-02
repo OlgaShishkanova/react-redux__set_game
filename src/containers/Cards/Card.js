@@ -13,12 +13,15 @@ export default class Card extends Component {
 
     render () {
 
-        const {number, colors, form, fullness, images} = this.props.item;
+        const {number, colors, form, fullness, images, id} = this.props.item;
+        const {tipIdsOfCards} =this.props.cards;
+
+        let idForTip = tipIdsOfCards.find(o => o === id);
 
         let arr =  Array.from({length: number}, (v, k) => k+1);
 
         return (
-            <div className={classNames('cards-item', this.state.chosen && 'chosen')} onClick={this.toggleCardChoose}>
+            <div className={classNames('cards-item', {chosen: this.state.chosen}, {tip: idForTip})} onClick={this.toggleCardChoose}>
                 <div>
                 {arr.map((item, key) =>
                     <div key={key}

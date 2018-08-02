@@ -33,6 +33,9 @@
   &.chosen{
     background: $orangeGrey;
   }
+  &.tip{
+    background: $lightGreen;
+  }
   &__form{
     width: 10rem;
     height: 5.4rem;

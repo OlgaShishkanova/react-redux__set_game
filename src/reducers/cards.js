@@ -5,7 +5,8 @@ import {
     CARDS_ADD_ITEMS,
     CARDS_REMOVE_ITEMS,
     CARDS_CHECK_SET_RIGHT,
-    CARDS_CHECK_SET_WRONG
+    CARDS_CHECK_SET_WRONG,
+    CARDS_SHOW_TIP
 
 } from '../constants/CARDS'
 
@@ -13,6 +14,7 @@ const initialState = {
     data: [],
     pieceOfCards: [],
     chosenCards: [],
+    tipIdsOfCards: [],
     score: 0,
     mistakes: 0,
     isAjax: false,
@@ -70,6 +72,15 @@ export default function Cards (state = initialState, action) {
                 chosenCards: []
             };
         }
+
+        case CARDS_SHOW_TIP:{
+
+            return {
+                ...state,
+                tipIdsOfCards: action.payload
+            };
+        }
+
 
 
         default:

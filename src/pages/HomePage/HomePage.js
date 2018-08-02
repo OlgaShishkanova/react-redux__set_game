@@ -57,6 +57,7 @@ export default class HomePage extends Component {
 
     getTip = (e) => {
         e.preventDefault();
+        this.props.cardsActions.getTip()
     };
 
 
