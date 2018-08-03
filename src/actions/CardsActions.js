@@ -99,36 +99,47 @@ export function getTip() {
 
         let pieceOfCards = getState().cards.pieceOfCards;
         let arrOfItems = [pieceOfCards[0].colors ? 'colors': 'images', 'number', 'form', 'fullness'];
+        let result = [];
         let ids = [];
-        let prevCards = {};
+        let currentItem = {};
+        let currentPairFirst = {};
+        let currentPairSecond = {};
 
-        pieceOfCards.reduce((accumulator, currentValue) => {
-            let result = [];
+        let arrOfPairs = pieceOfCards.reduce((accumulator, currentValue, currentIndex) =>
+            accumulator.concat(pieceOfCards.slice(currentIndex+1).map( item => [currentValue, item] )),
+            []);
 
-            if(result.length<4){
-                arrOfItems.forEach((item) => {
-                    if (accumulator[item] === currentValue[item] &&  currentValue[item] === prevCards[item]) {
-                        console.log('все равно', accumulator[item], currentValue[item], prevCards[item]);
-                        result = [...result, true]
+       loopLabel: for (let oneItem of pieceOfCards) {
+            for (let pair of arrOfPairs) {
+                for (let feature of arrOfItems) {
+
+                    if (currentItem.id !== oneItem.id ||
+                        currentPairFirst.id !== pair[0].id ||
+                        currentPairSecond.id !== pair[1].id
+                    ) {
+                        result = []
                     }
+                    currentItem = oneItem;
+                    currentPairFirst = pair[0];
+                    currentPairSecond.id = pair[1].id;
 
-                    if (accumulator[item] !== currentValue[item]) {
-                        if (prevCards[item] !== undefined && prevCards[item] !== currentValue[item]) {
-                            if (prevCards[item] !== undefined && prevCards[item] !== accumulator[item]) {
-                                console.log('все неравно', accumulator[item], currentValue[item], prevCards[item]);
-                                result = [...result, true]
-                            }
-                        }
+
+                    if (pair[0][feature] === pair[1][feature] && pair[1][feature] === oneItem[feature]) {
+                        result = [...result, true];
                     }
-                });
+                    if (pair[0][feature] !== pair[1][feature]
+                        && pair[1][feature] !== oneItem[feature]
+                        && pair[0][feature] !== oneItem[feature]) {
+                        result = [...result, true];
+                    }
+                    if (result.length === 4) {
+                        ids = [pair[0].id, pair[1].id, oneItem.id];
+
+                        break loopLabel;
+                    }
+                }
             }
-            prevCards = accumulator;
-            console.log(result.length);
-            if(result.length===4){
-                ids = [accumulator.id, currentValue.id, prevCards.id];
-            }
-            return currentValue;
-        });
+        }
 
         dispatch({
             type: CARDS_SHOW_TIP,
@@ -147,17 +158,14 @@ export function checkSet() {
         let result = [];
 
         arrOfItems.forEach((item) => {
-            if(chosenCards[0][item] === chosenCards[1][item]){
-                if(chosenCards[1][item] === chosenCards[2][item]){
-                    result = [...result, true]
-                }
+            if(chosenCards[0][item] === chosenCards[1][item]
+                && chosenCards[1][item] === chosenCards[2][item]) {
+                result = [...result, true]
             }
-            if(chosenCards[0][item] !== chosenCards[1][item]){
-                if(chosenCards[1][item] !== chosenCards[2][item]){
-                    if(chosenCards[0][item] !== chosenCards[2][item]){
-                        result = [...result, true]
-                    }
-                }
+            if(chosenCards[0][item] !== chosenCards[1][item]
+                && chosenCards[1][item] !== chosenCards[2][item]
+                && chosenCards[0][item] !== chosenCards[2][item]) {
+                result = [...result, true]
             }
         });
 
