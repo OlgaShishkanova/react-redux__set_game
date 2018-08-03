@@ -99,28 +99,32 @@ export function getTip() {
 
         let pieceOfCards = getState().cards.pieceOfCards;
         let arrOfItems = [pieceOfCards[0].colors ? 'colors': 'images', 'number', 'form', 'fullness'];
-        let result = [];
         let ids = [];
         let prevCards = {};
 
         pieceOfCards.reduce((accumulator, currentValue) => {
+            let result = [];
 
             if(result.length<4){
                 arrOfItems.forEach((item) => {
-                    if (accumulator[item] === currentValue[item] === prevCards[item]) {
+                    if (accumulator[item] === currentValue[item] &&  currentValue[item] === prevCards[item]) {
+                        console.log('все равно', accumulator[item], currentValue[item], prevCards[item]);
                         result = [...result, true]
                     }
 
                     if (accumulator[item] !== currentValue[item]) {
                         if (prevCards[item] !== undefined && prevCards[item] !== currentValue[item]) {
                             if (prevCards[item] !== undefined && prevCards[item] !== accumulator[item]) {
+                                console.log('все неравно', accumulator[item], currentValue[item], prevCards[item]);
                                 result = [...result, true]
                             }
                         }
                     }
                 });
-                prevCards = accumulator;
-            }else{
+            }
+            prevCards = accumulator;
+            console.log(result.length);
+            if(result.length===4){
                 ids = [accumulator.id, currentValue.id, prevCards.id];
             }
             return currentValue;
@@ -146,19 +150,13 @@ export function checkSet() {
             if(chosenCards[0][item] === chosenCards[1][item]){
                 if(chosenCards[1][item] === chosenCards[2][item]){
                     result = [...result, true]
-                }else{
-                    return false
                 }
             }
             if(chosenCards[0][item] !== chosenCards[1][item]){
                 if(chosenCards[1][item] !== chosenCards[2][item]){
                     if(chosenCards[0][item] !== chosenCards[2][item]){
                         result = [...result, true]
-                    }else{
-                        return false
                     }
-                }else{
-                    return false
                 }
             }
         });
@@ -169,7 +167,7 @@ export function checkSet() {
                 type: CARDS_CHECK_SET_RIGHT,
                 payload: {score: 1, reducedData: removeCardsOfRightSet(getState)}
             });
-            if(data.length>3 && pieceOfCards.length<12){
+            if(data.length>3 && pieceOfCards.length<15){
                 this.getRandomCards(3);
             }
 
