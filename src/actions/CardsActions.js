@@ -101,9 +101,6 @@ export function getTip() {
         let arrOfItems = [pieceOfCards[0].colors ? 'colors': 'images', 'number', 'form', 'fullness'];
         let result = [];
         let ids = [];
-        let currentItem = {};
-        let currentPairFirst = {};
-        let currentPairSecond = {};
 
         let arrOfPairs = pieceOfCards.reduce((accumulator, currentValue, currentIndex) =>
             accumulator.concat(pieceOfCards.slice(currentIndex+1).map( item => [currentValue, item] )),
@@ -111,26 +108,17 @@ export function getTip() {
 
        loopLabel: for (let oneItem of pieceOfCards) {
             for (let pair of arrOfPairs) {
+                result = [];
                 for (let feature of arrOfItems) {
-
-                    if (currentItem.id !== oneItem.id ||
-                        currentPairFirst.id !== pair[0].id ||
-                        currentPairSecond.id !== pair[1].id
-                    ) {
-                        result = []
-                    }
-                    currentItem = oneItem;
-                    currentPairFirst = pair[0];
-                    currentPairSecond.id = pair[1].id;
-
 
                     if (pair[0][feature] === pair[1][feature] && pair[1][feature] === oneItem[feature]) {
                         result = [...result, true];
-                    }
-                    if (pair[0][feature] !== pair[1][feature]
+                    } else if (pair[0][feature] !== pair[1][feature]
                         && pair[1][feature] !== oneItem[feature]
                         && pair[0][feature] !== oneItem[feature]) {
                         result = [...result, true];
+                    }else {
+                        break;
                     }
                     if (result.length === 4) {
                         ids = [pair[0].id, pair[1].id, oneItem.id];
@@ -157,7 +145,7 @@ export function checkSet() {
         let arrOfItems = [chosenCards[0].colors ? 'colors': 'images', 'number', 'form', 'fullness'];
         let result = [];
 
-        arrOfItems.forEach((item) => {
+        for (let item of arrOfItems) {
             if(chosenCards[0][item] === chosenCards[1][item]
                 && chosenCards[1][item] === chosenCards[2][item]) {
                 result = [...result, true]
@@ -167,7 +155,7 @@ export function checkSet() {
                 && chosenCards[0][item] !== chosenCards[2][item]) {
                 result = [...result, true]
             }
-        });
+        }
 
         if(result.length === 4) {
 
