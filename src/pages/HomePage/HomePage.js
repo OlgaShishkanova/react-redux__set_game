@@ -13,7 +13,7 @@ export default class HomePage extends Component {
     state = {
         isAlert: false,
         message: '',
-        isRight: false
+        status: 'neutral'
     };
 
 
@@ -21,7 +21,7 @@ export default class HomePage extends Component {
 
         const {intro_name} = this.props.state;
         const {data, score, mistakes} = this.props.cards;
-        const {message, isAlert, isRight} = this.state;
+        const {message, isAlert, status} = this.state;
 
         return (
             <div className='home__wrapper'>
@@ -36,7 +36,11 @@ export default class HomePage extends Component {
                         <div>Your SCORE: <span>{score}</span></div>
                         <div>Your mistakes: <span>{mistakes}</span></div>
                         </div>
-                        <div className={classNames('alert', isAlert && 'show', isRight? 'yes': 'no')}>{message}</div>
+                        <div className={classNames('alert', isAlert && 'show',
+                            {yes: status === 'yes'},
+                            {no: status === 'no'},
+                            {neutral: status === 'neutral'}
+                        )}>{message}</div>
                         <div className='home__buttons'>
                             <button className={classNames('usual_btn', this.props.cards.pieceOfCards.length > 12 && 'disabled')} onClick={this.addCards}>Add 3 cards</button>
                             <button className='usual_btn' onClick={this.getTip}>Get a tip</button>
@@ -66,12 +70,12 @@ export default class HomePage extends Component {
     }
     componentDidUpdate(prevProps){
 
-        const {score, mistakes} = this.props.cards;
+        const {score, mistakes, isSet} = this.props.cards;
 
         if(score !== prevProps.cards.score) {
             this.setState({
                 message: 'YEEAAAHHH!',
-                isRight: true,
+                status: 'yes',
                 isAlert: true
             });
             this.removeAlert()
@@ -80,10 +84,29 @@ export default class HomePage extends Component {
         if(mistakes !== prevProps.cards.mistakes) {
             this.setState({
                 message: 'NO :(',
-                isRight: false,
+                status: 'no',
                 isAlert: true
             });
             this.removeAlert()
+        }
+        if(isSet !== prevProps.cards.isSet && isSet === false) {
+            if(this.props.cards.data.length !== 0){
+                this.setState({
+                    message: 'NO SET HERE',
+                    isAlert: true,
+                    status: 'neutral'
+                });
+            }else{
+                this.setState({
+                    message: 'CONGRATULATION! YOU WON!',
+                    isAlert: true,
+                    status: 'celebrate'
+                });
+            }
+        }
+
+        if(this.props.cards.pieceOfCards.length !== prevProps.cards.pieceOfCards.length && this.props.cards.data.length === 0){
+            this.props.cardsActions.getTip()
         }
     }
 

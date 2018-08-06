@@ -48,4 +48,10 @@
     &.no{
       background: $orange;
     }
+    &.neutral{
+      background: $grey;
+    }
+    &.celebrate{
+      background: linear-gradient(45deg, $green, $orange, $purple);
+    }
   }

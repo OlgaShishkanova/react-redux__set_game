@@ -128,11 +128,20 @@ export function getTip() {
                 }
             }
         }
+        if(ids.length === 0 ){
+           let isSet = false;
+            dispatch({
+                type: CARDS_SHOW_TIP,
+                payload: {ids, isSet}
+            })
+        }else{
+            let isSet = true;
+            dispatch({
+                type: CARDS_SHOW_TIP,
+                payload: {ids, isSet}
+            })
+        }
 
-        dispatch({
-            type: CARDS_SHOW_TIP,
-            payload: ids
-        })
     }
 }
 

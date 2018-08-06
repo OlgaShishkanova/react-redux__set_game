@@ -27,14 +27,14 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  &.tip{
+    background: $lightGreen;
+  }
   &:hover{
     background: $orangeGrey;
   }
   &.chosen{
     background: $orangeGrey;
-  }
-  &.tip{
-    background: $lightGreen;
   }
   &__form{
     width: 10rem;

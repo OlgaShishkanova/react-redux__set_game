@@ -15,6 +15,7 @@ const initialState = {
     pieceOfCards: [],
     chosenCards: [],
     tipIdsOfCards: [],
+    isSet: false,
     score: 0,
     mistakes: 0,
     isAjax: false,
@@ -77,7 +78,8 @@ export default function Cards (state = initialState, action) {
 
             return {
                 ...state,
-                tipIdsOfCards: action.payload
+                tipIdsOfCards: action.payload.ids,
+                isSet: action.payload.isSet
             };
         }
 
