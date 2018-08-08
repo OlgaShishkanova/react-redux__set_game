@@ -6,7 +6,8 @@ import {
     CARDS_REMOVE_ITEMS,
     CARDS_CHECK_SET_RIGHT,
     CARDS_CHECK_SET_WRONG,
-    CARDS_SHOW_TIP
+    CARDS_SHOW_TIP,
+    CARDS_GAME_END
 
 } from '../constants/CARDS'
 
@@ -15,6 +16,7 @@ const initialState = {
     pieceOfCards: [],
     chosenCards: [],
     tipIdsOfCards: [],
+    congrats: false,
     isSet: false,
     score: 0,
     mistakes: 0,
@@ -82,6 +84,12 @@ export default function Cards (state = initialState, action) {
                 isSet: action.payload.isSet
             };
         }
+
+        case CARDS_GAME_END:
+            return {
+                ...state,
+                congrats: action.payload
+            };
 
 
 

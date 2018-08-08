@@ -26,10 +26,6 @@ export default class CardsContainer extends Component {
         );
     }
 
-    componentDidMount() {
-        this.props.actions.getRandomCards(12)
-    }
-
     componentDidUpdate(prevProps) {
 
         if (this.props.state.chosenCards !== prevProps.state.chosenCards && this.props.state.chosenCards.length === 3) {

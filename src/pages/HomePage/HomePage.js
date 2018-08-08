@@ -16,16 +16,18 @@ export default class HomePage extends Component {
         status: 'neutral'
     };
 
+    timerId = 0;
+
 
     render () {
 
         const {intro_name} = this.props.state;
-        const {data, score, mistakes} = this.props.cards;
+        const {pieceOfCards, score, mistakes} = this.props.cards;
         const {message, isAlert, status} = this.state;
 
         return (
             <div className='home__wrapper'>
-                {data && data.length === 0 ?
+                {pieceOfCards && pieceOfCards.length === 0 ?
                     <Fragment>
                         <div className='main_title'>Hello, {intro_name}!</div>
                         <ModeForm/>
@@ -33,19 +35,23 @@ export default class HomePage extends Component {
                     :
                     <Fragment>
                         <div className='game-info'>
-                        <div>Your SCORE: <span>{score}</span></div>
-                        <div>Your mistakes: <span>{mistakes}</span></div>
+                            <div>Your SCORE: <span>{score}</span></div>
+                            <div>Your mistakes: <span>{mistakes}</span></div>
                         </div>
                         <div className={classNames('alert', isAlert && 'show',
                             {yes: status === 'yes'},
                             {no: status === 'no'},
-                            {neutral: status === 'neutral'}
+                            {neutral: status === 'neutral'},
+                            {celebrate: status === 'celebrate'}
                         )}>{message}</div>
                         <div className='home__buttons'>
-                            <button className={classNames('usual_btn', this.props.cards.pieceOfCards.length > 12 && 'disabled')} onClick={this.addCards}>Add 3 cards</button>
+                            <button
+                                className={classNames('usual_btn', this.props.cards.pieceOfCards.length > 12 && 'disabled')}
+                                onClick={this.addCards}>Add 3 cards
+                            </button>
                             <button className='usual_btn' onClick={this.getTip}>Get a tip</button>
                         </div>
-                    <CardsContainer/>
+                        <CardsContainer/>
                     </Fragment>
                 }
             </div>
@@ -73,6 +79,8 @@ export default class HomePage extends Component {
         const {score, mistakes, isSet} = this.props.cards;
 
         if(score !== prevProps.cards.score) {
+            console.log(this.timerId);
+            clearTimeout(this.timerId);
             this.setState({
                 message: 'YEEAAAHHH!',
                 status: 'yes',
@@ -80,8 +88,8 @@ export default class HomePage extends Component {
             });
             this.removeAlert()
         }
-
         if(mistakes !== prevProps.cards.mistakes) {
+            clearTimeout(this.timerId);
             this.setState({
                 message: 'NO :(',
                 status: 'no',
@@ -90,30 +98,36 @@ export default class HomePage extends Component {
             this.removeAlert()
         }
         if(isSet !== prevProps.cards.isSet && isSet === false) {
+            clearTimeout(this.timerId);
             if(this.props.cards.data.length !== 0){
                 this.setState({
                     message: 'NO SET HERE',
                     isAlert: true,
                     status: 'neutral'
                 });
-            }else{
-                this.setState({
-                    message: 'CONGRATULATION! YOU WON!',
-                    isAlert: true,
-                    status: 'celebrate'
-                });
             }
         }
 
+        console.log(this.props.cards.data.length, prevProps.cards.data.length);
         if(this.props.cards.pieceOfCards.length !== prevProps.cards.pieceOfCards.length && this.props.cards.data.length === 0){
-            this.props.cardsActions.getTip()
+            console.log('0 карт осталось, вызываем getTip');
+            let finish = true;
+            this.props.cardsActions.getTip(finish)
+        }
+        if(this.props.cards.congrats !== prevProps.cards.congrats && this.props.cards.congrats){
+            clearTimeout(this.timerId);
+            this.setState({
+                message: 'CONGRATULATION! YOU WON!',
+                isAlert: true,
+                status: 'celebrate'
+            });
         }
     }
 
     removeAlert = () =>{
-        setTimeout(() => { this.setState({
+        this.timerId = setTimeout(() => { this.setState({
             isAlert: false
-        }); }, 2000);
+        }); }, 1500);
     }
 }
 function mapStateToProps (state) {

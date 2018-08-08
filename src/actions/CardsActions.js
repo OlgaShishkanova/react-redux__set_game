@@ -6,7 +6,8 @@ import {
     CARDS_REMOVE_ITEMS,
     CARDS_CHECK_SET_RIGHT,
     CARDS_CHECK_SET_WRONG,
-    CARDS_SHOW_TIP
+    CARDS_SHOW_TIP,
+    CARDS_GAME_END
 
 } from '../constants/CARDS'
 
@@ -29,6 +30,8 @@ export function loadCardsData (mode) {
                     type: CARDS_DATA_LOAD_END,
                     payload: response.data
                 });
+        }).then (() =>{
+            this.getRandomCards(12);
         })
             .catch((error) => {
                 if (error.response) {
@@ -94,12 +97,13 @@ export function removeCardsOfRightSet(getState) {
     return pieceOfCards
 }
 
-export function getTip() {
+export function getTip(finish) {
     return (dispatch, getState) => {
 
         let pieceOfCards = getState().cards.pieceOfCards;
         let arrOfItems = [pieceOfCards[0].colors ? 'colors': 'images', 'number', 'form', 'fullness'];
         let result = [];
+        let data = getState().cards.data;
         let ids = [];
 
         let arrOfPairs = pieceOfCards.reduce((accumulator, currentValue, currentIndex) =>
@@ -128,13 +132,23 @@ export function getTip() {
                 }
             }
         }
-        if(ids.length === 0 ){
+        if(ids.length === 0 && data.length !== 0){
            let isSet = false;
             dispatch({
                 type: CARDS_SHOW_TIP,
                 payload: {ids, isSet}
             })
-        }else{
+        }else if(ids.length === 0 && finish) {
+            dispatch({
+                type: CARDS_GAME_END,
+                payload: true
+            })
+        }else if(ids.length !== 0 && finish){
+            dispatch({
+                type: CARDS_GAME_END,
+                payload: false
+            })
+        } else {
             let isSet = true;
             dispatch({
                 type: CARDS_SHOW_TIP,
@@ -172,7 +186,7 @@ export function checkSet() {
                 type: CARDS_CHECK_SET_RIGHT,
                 payload: {score: 1, reducedData: removeCardsOfRightSet(getState)}
             });
-            if(data.length>3 && pieceOfCards.length<15){
+            if(data.length>=3 && pieceOfCards.length<15){
                 this.getRandomCards(3);
             }
 
