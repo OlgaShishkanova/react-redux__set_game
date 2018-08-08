@@ -107,10 +107,7 @@ export default class HomePage extends Component {
                 });
             }
         }
-
-        console.log(this.props.cards.data.length, prevProps.cards.data.length);
         if(this.props.cards.pieceOfCards.length !== prevProps.cards.pieceOfCards.length && this.props.cards.data.length === 0){
-            console.log('0 карт осталось, вызываем getTip');
             let finish = true;
             this.props.cardsActions.getTip(finish)
         }
