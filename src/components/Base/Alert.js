@@ -36,14 +36,13 @@ export default class Alert extends PureComponent {
         this.timerId = setTimeout(() => { this.setState({
             isAlert: false
         }); }, 1500);
-    }
+    };
 
     componentDidUpdate(prevProps){
 
         const {score, mistakes, isSet} = this.props.cards;
 
         if(score !== prevProps.cards.score) {
-            console.log(this.timerId);
             clearTimeout(this.timerId);
             this.setState({
                 message: 'YEEAAAHHH!',

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import classNames from "classnames";
-
+import { NavLink } from 'react-router-dom'
 
 export default class RulesPage extends Component {
 
@@ -8,6 +8,7 @@ export default class RulesPage extends Component {
 
         return (
             <div className='rules'>
+                <NavLink className='rules__back-link'  to="/" exact>Go Back</NavLink>
 
                 <h2>What is a SET?</h2>
 
