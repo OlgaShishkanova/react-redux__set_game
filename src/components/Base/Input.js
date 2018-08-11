@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-//import css from './Input.scss'
 import {bindActionCreators} from "redux";
 import PropTypes from 'prop-types'
 import ErrorsHandler from './ErrorsHandler'

@@ -7,24 +7,16 @@ import {bindActionCreators} from "redux";
 import ModeForm from "../../containers/Mode/ModeForm";
 import CardsContainer from "../../containers/Cards/CardsContainer";
 import classNames from 'classnames'
+import Alert from "../../components/Base/Alert";
 
 @connect(mapStateToProps, mapDispatchToProps)
 export default class HomePage extends Component {
-
-    state = {
-        isAlert: false,
-        message: '',
-        status: 'neutral'
-    };
-
-    timerId = 0;
 
 
     render () {
 
         const {intro_name} = this.props.state;
         const {pieceOfCards, score, mistakes} = this.props.cards;
-        const {message, isAlert, status} = this.state;
 
         return (
             <div className='home__wrapper'>
@@ -42,12 +34,7 @@ export default class HomePage extends Component {
                             <div>Your SCORE: <span>{score}</span></div>
                             <div>Your mistakes: <span>{mistakes}</span></div>
                         </div>
-                        <div className={classNames('alert', isAlert && 'show',
-                            {yes: status === 'yes'},
-                            {no: status === 'no'},
-                            {neutral: status === 'neutral'},
-                            {celebrate: status === 'celebrate'}
-                        )}>{message}</div>
+                       <Alert cards = {this.props.cards}/>
                         <div className='home__buttons'>
                             <button
                                 className={classNames('usual_btn', this.props.cards.pieceOfCards.length > 12 && 'disabled')}
@@ -80,55 +67,10 @@ export default class HomePage extends Component {
     }
     componentDidUpdate(prevProps){
 
-        const {score, mistakes, isSet} = this.props.cards;
-
-        if(score !== prevProps.cards.score) {
-            console.log(this.timerId);
-            clearTimeout(this.timerId);
-            this.setState({
-                message: 'YEEAAAHHH!',
-                status: 'yes',
-                isAlert: true
-            });
-            this.removeAlert()
-        }
-        if(mistakes !== prevProps.cards.mistakes) {
-            clearTimeout(this.timerId);
-            this.setState({
-                message: 'NO :(',
-                status: 'no',
-                isAlert: true
-            });
-            this.removeAlert()
-        }
-        if(isSet !== prevProps.cards.isSet && isSet === false) {
-            clearTimeout(this.timerId);
-            if(this.props.cards.data.length !== 0){
-                this.setState({
-                    message: 'NO SET HERE',
-                    isAlert: true,
-                    status: 'neutral'
-                });
-            }
-        }
         if(this.props.cards.pieceOfCards.length !== prevProps.cards.pieceOfCards.length && this.props.cards.data.length === 0){
             let finish = true;
             this.props.cardsActions.getTip(finish)
         }
-        if(this.props.cards.congrats !== prevProps.cards.congrats && this.props.cards.congrats){
-            clearTimeout(this.timerId);
-            this.setState({
-                message: 'CONGRATULATION! YOU WON!',
-                isAlert: true,
-                status: 'celebrate'
-            });
-        }
-    }
-
-    removeAlert = () =>{
-        this.timerId = setTimeout(() => { this.setState({
-            isAlert: false
-        }); }, 1500);
     }
 }
 function mapStateToProps (state) {
