@@ -18,6 +18,16 @@
       display: block;
     }
   }
+  &__rules-link{
+    font-weight: bold;
+    font-size: 2rem;
+    &__wrapper{
+      text-align: right;
+      position: absolute;
+      top: 2rem;
+      right: -2rem;
+    }
+  }
 }
   .game-info{
     font-size: 2.2rem;

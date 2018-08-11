@@ -37,8 +37,13 @@ body {
 
 a {
   color: $brightPurple;
+  font-size: $font-size-base;
+  text-decoration: none;
+  border-bottom: 2px dashed $brightPurple;
+  transition: all .2s;
   &:hover {
     color: $brightOrange;
+    border-bottom: 2px solid $brightOrange;
   }
 }
 

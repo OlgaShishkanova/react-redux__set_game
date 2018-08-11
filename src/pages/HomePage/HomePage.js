@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import {connect} from "react-redux";
+import { NavLink } from 'react-router-dom'
 import * as AppActions from "../../actions/AppActions";
 import * as CardsActions from "../../actions/CardsActions";
 import {bindActionCreators} from "redux";
@@ -27,6 +28,9 @@ export default class HomePage extends Component {
 
         return (
             <div className='home__wrapper'>
+                <div className='home__rules-link__wrapper'>
+                <NavLink className='home__rules-link' to="/rules" exact>Read the rules</NavLink>
+                </div>
                 {pieceOfCards && pieceOfCards.length === 0 ?
                     <Fragment>
                         <div className='main_title'>Hello, {intro_name}!</div>

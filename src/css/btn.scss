@@ -6,6 +6,7 @@
   font-weight: bold;
   border: 2px solid $brightOrange;
   color: $cGrey;
+  transition: all .2s;
   &:hover,
   &:active{
     background: $cGrey;
@@ -22,5 +23,9 @@
       color: $cGrey;
       opacity: 0.5;
     }
+  }
+  &.link{
+    text-decoration: none;
+    font-size: 2.5rem;
   }
 }
