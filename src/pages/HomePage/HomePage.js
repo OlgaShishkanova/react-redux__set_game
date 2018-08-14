@@ -60,11 +60,7 @@ export default class HomePage extends Component {
         e.preventDefault();
         this.props.cardsActions.getTip()
     };
-
-
-    componentDidMount(){
-        this.props.actions.localStorageSetItem('score', 0);
-    }
+    
     componentDidUpdate(prevProps){
 
         if(this.props.cards.pieceOfCards.length !== prevProps.cards.pieceOfCards.length && this.props.cards.data.length === 0){

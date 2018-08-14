@@ -62,8 +62,6 @@ export default class ModeForm extends Component {
                                         </div>
                                     </div>
                                 </div>
-
-
                                 </span>
                             </label>
                         </div>

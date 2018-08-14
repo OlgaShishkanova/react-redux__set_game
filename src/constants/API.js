@@ -1,1 +1,1 @@
-export const ACTION_CARDS_LOAD = '/api/getdata';
+export const ACTION_CARDS_LOAD = "/api/getdata";

@@ -15,7 +15,6 @@ export default function App (state = initialState, action) {
     switch (action.type) {
 
         case LOCAL_STORAGE_GET_ITEM:{
-            console.log(action.payload.name);
             return {
                 ...state,
                 [action.payload.name]: JSON.parse(localStorage.getItem(action.payload.name))

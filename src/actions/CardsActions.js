@@ -11,6 +11,8 @@ import {
 
 } from '../constants/CARDS'
 
+import {ACTION_CARDS_LOAD} from '../constants/API'
+
 import axios from 'axios';
 
 
@@ -20,7 +22,7 @@ export function loadCardsData (mode) {
             type: CARDS_DATA_LOAD_START
         });
 
-        axios.get("/api/getdata", {
+        axios.get(ACTION_CARDS_LOAD, {
             params: {
                 mode: mode
             }
@@ -32,8 +34,7 @@ export function loadCardsData (mode) {
                 });
         }).then (() =>{
             this.getRandomCards(12);
-        })
-            .catch((error) => {
+        }).catch((error) => {
                 if (error.response) {
                     console.log([error.response.data,
                         error.response.status,

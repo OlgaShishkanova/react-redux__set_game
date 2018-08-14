@@ -25,9 +25,11 @@
   img{
     width: 45rem;
     display: block;
+    margin: 0 auto;
   }
   .alert{
     position: static;
     margin-bottom: 1rem;
+    width: 100%;
   }
 }
