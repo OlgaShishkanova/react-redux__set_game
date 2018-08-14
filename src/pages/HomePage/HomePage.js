@@ -60,10 +60,11 @@ export default class HomePage extends Component {
         e.preventDefault();
         this.props.cardsActions.getTip()
     };
-    
+
     componentDidUpdate(prevProps){
 
         if(this.props.cards.pieceOfCards.length !== prevProps.cards.pieceOfCards.length && this.props.cards.data.length === 0){
+            //when there're no cards in data, check if there's more sets or no
             let finish = true;
             this.props.cardsActions.getTip(finish)
         }

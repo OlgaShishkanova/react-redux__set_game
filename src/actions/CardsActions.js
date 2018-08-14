@@ -106,32 +106,37 @@ export function getTip(finish) {
         let result = [];
         let data = getState().cards.data;
         let ids = [];
+        let arrTriplets = [];
 
-        let arrOfPairs = pieceOfCards.reduce((accumulator, currentValue, currentIndex) =>
-            accumulator.concat(pieceOfCards.slice(currentIndex+1).map( item => [currentValue, item] )),
-            []);
+        //make all possible triplets of cards
+        for (let i = 0; i < pieceOfCards.length - 2; i++) {
+            for (let j = i + 1; j < pieceOfCards.length - 1; j++) {
+                for (let k = j + 1; k < pieceOfCards.length; k++){
+                    arrTriplets = [...arrTriplets, [pieceOfCards[i], pieceOfCards[j], pieceOfCards[k]]]
+                }
+            }
+        }
 
-       loopLabel: for (let oneItem of pieceOfCards) {
-            for (let pair of arrOfPairs) {
+        //compare features in each triplets
+       loopLabel: for (let triplet of arrTriplets) {
                 result = [];
                 for (let feature of arrOfItems) {
 
-                    if (pair[0][feature] === pair[1][feature] && pair[1][feature] === oneItem[feature]) {
+                    if (triplet[0][feature] === triplet[1][feature] && triplet[1][feature] === triplet[2][feature]) {
                         result = [...result, true];
-                    } else if (pair[0][feature] !== pair[1][feature]
-                        && pair[1][feature] !== oneItem[feature]
-                        && pair[0][feature] !== oneItem[feature]) {
+                    } else if (triplet[0][feature] !== triplet[1][feature]
+                        && triplet[1][feature] !== triplet[2][feature]
+                        && triplet[0][feature] !== triplet[2][feature]) {
                         result = [...result, true];
-                    }else {
+                    } else {
                         break;
                     }
                     if (result.length === 4) {
-                        ids = [pair[0].id, pair[1].id, oneItem.id];
+                        ids = [triplet[0].id, triplet[1].id, triplet[2].id];
 
                         break loopLabel;
                     }
                 }
-            }
         }
         if(ids.length === 0 && data.length !== 0){
            let isSet = false;
@@ -139,6 +144,7 @@ export function getTip(finish) {
                 type: CARDS_SHOW_TIP,
                 payload: {ids, isSet}
             })
+            //check if there is more sets or no
         }else if(ids.length === 0 && finish) {
             dispatch({
                 type: CARDS_GAME_END,
