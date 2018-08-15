@@ -1,8 +1,14 @@
 const express = require('express');
 const app = express();
+const path = require('path');
 
-app.use(express.static('../public'));
-app.get('/', (req, res) => res.send('Hello World!'));
+const port = process.env.PORT || '8080';
+
+const routePath = path.join(__dirname + '..', '..');
+
+app.use(express.static(routePath + '/public'));
+app.use(express.static(routePath + '/dist'));
+
 app.get('/api/getdata', (req, res) => {
     let params = req.query.mode;
     if(params==='classic'){
@@ -15,8 +21,11 @@ app.get('/api/getdata', (req, res) => {
     }
 });
 
+app.get('/*', (req, res, next) => {
+    res.sendFile(routePath + '/dist/' + 'index.html');
+});
 
-app.listen(8080, () => console.log("Listening on port 8080!"));
+app.listen(port, () => console.log("Listening on port 8080!"));
 
 generateCards = (name,data) => {
 
