@@ -6,7 +6,7 @@ const port = process.env.PORT || '8080';
 
 const routePath = path.join(__dirname + '..', '..');
 
-app.use(express.static(routePath + '/public'));
+app.use('/public', express.static(routePath + '/public'));
 app.use(express.static(routePath + '/dist'));
 
 app.get('/api/getdata', (req, res) => {
