@@ -12,7 +12,11 @@ All rules are also available on the Rules Page of my project.
 ## 3. How to install and run it
 
 1. Clone or download this repository
-2. Write:
+2. Write
+```
+npm install
+```
+3. Then write:
 ```
 npm run start:prod
 ```
