@@ -48,9 +48,10 @@ export default class IntroPage extends Component {
             }else {
 
                 return (
-                    <div className='wrapper'>
+                    <div className='intro-wrapper'>
                         <div className='main_title'>Hello, honorable Stranger</div>
-                        <form className="intro_from"
+                        <div className='main_subtitle'>SET game is greeting you</div>
+                        <form className="intro-form"
                               onSubmit={this.handleSubmit}
                         >
 
