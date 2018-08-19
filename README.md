@@ -17,5 +17,5 @@ All rules are also available on the Rules Page of my project.
 npm run start:prod
 ```
 
-## 7. Author info
+## 4. Author info
 To know about me more - my [Linkedin profile](https://www.linkedin.com/in/oshishkanova/?locale=en_US)
